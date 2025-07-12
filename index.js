@@ -5,7 +5,7 @@ const express=require("express");
 const userRouter=require("./routes/user");
 const taskrouter=require("./routes/task");
 const corsOptions = {
-  origin: 'https://tasknest-client-jet.vercel.app',
+  origin: process.env.CLIENT_URL,
   methods: ['GET', 'POST', 'OPTIONS'], // Include OPTIONS for preflight
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true // If using cookies/tokens
