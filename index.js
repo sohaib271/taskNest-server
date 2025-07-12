@@ -4,14 +4,16 @@ const cors=require("cors");
 const express=require("express");
 const userRouter=require("./routes/user");
 const taskrouter=require("./routes/task");
+const corsOptions = {
+  origin: 'https://tasknest-client-jet.vercel.app',
+  methods: ['GET', 'POST', 'OPTIONS'], // Include OPTIONS for preflight
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true // If using cookies/tokens
+};
 
 const app=express();
 app.use(express.json());
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,}));
+app.use(cors(corsOptions));
 
 mongoose.connect(process.env.MONGO_DB_URL)
 .then(()=>console.log("Database Connected"))
